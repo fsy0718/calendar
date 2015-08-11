@@ -21,3 +21,15 @@ gulp.task('sass',function(){
     .pipe(gulp.dest('css'))
 
 })
+
+
+gulp.task('jsdoc',['coffee'],function(){
+  return gulp.src(['./js/fCalendar/*.js'])
+    .pipe(jsdoc.parser())
+    .pipe(jsdoc.generator('doc',null,{
+      'private': true,
+      monospaceLinks: true,
+      cleverLinks: true,
+      outputSourceFiles: true
+    }))
+})

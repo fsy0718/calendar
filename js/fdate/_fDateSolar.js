@@ -1,4 +1,4 @@
-define(function() {
+define(['jquery'], function($) {
   var FDateSolar, dateReg, days, digit, isLegalDate, oDate, weekZh;
   dateReg = /^(\d{2,4})(?:([-,\/\s+])(1[012]|0?[1-9]))?(?:\2(0?[1-9]|[12]\d|3[01]))?$/;
   days = [31, null, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];

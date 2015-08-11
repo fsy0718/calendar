@@ -17,9 +17,32 @@
 %f-fl{
   float: left;
 }
+%f-fr{
+  float: right;
+}
 %f-dn{
   display: none;
 }
+
+.f-fr{
+  float: right;
+}
+.f-fl{
+  float: left;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+a{
+  text-decoration: none;
+  background: transparent;
+}
+
 $u-triangle1: .5em .5em #a5b0b9;
 
 //有用的一些扩展

@@ -1,24 +1,46 @@
+###*
+ * @module core
+ * @desc 日历核心模块
+ * @requires  fDateSolar 公历日期相关扩展方法
+
 ###
-* 日历核心模块
-* month 统一从1开始计数
-###
-define ['fdate/fDateSolar'],(fDateSolar)->
+define ['./fdate-solar'],(fDateSolar)->
+  ###*
+   * @inner 星期相关参数
+   * @type {string}
+  ###
   weekZh = '日一二三四五六'
   weekN = '0123456'
+
+  ###*
+   * @inner 当前日期对象
+   * @type {fDateSolar}
+  ###
   oDate = fDateSolar()
+
   today = oDate.format('-')
+
   #内部状态变量
   SELDAY = null  #表示当前选中的日期
   YEAR = null   #表示需要跳转的年份 便于点击月份切换后年份跟着变动
+
+  ###*
+   * @class FCalendar
+   * @desc 日历插件构造函数
+   * @param { JqueryDOM} obj  渲染日历依赖的 jquery DOM 元素
+   * @param {Object} [conf]  配置参数@see {@link conf}
+   *
+  ###
   FCalendar = (obj,conf) ->
     self = @
     self._HASLIST = []
     idx = 0
     self.conf = conf
     self.fidx = ++idx
+    return unless obj.length
     obj.attr('fc-fidx',idx).addClass('fc-fidx-' + idx + ' ' + (self.conf.theme || 'intact'))
     unless $('#fsycalendar-' + self.conf.theme).length
-      $('<link rel="stylesheet" type="text/css" href="./css/' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head')
+      $('<link rel="stylesheet" type="text/css" href="' + SX.eve + '/css/calendar-' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head')
     #骨架
     shelf = _calShelf(self).appendTo(obj)
     _changeView(self,obj,null,true)

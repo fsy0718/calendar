@@ -10,6 +10,15 @@
 .date-picker .fc-sel-year .prev, .date-picker .fc-sel-year .next, .date-picker .fc-sel-month .prev, .date-picker .fc-sel-month .next {
   background-image: url(../img/main_bg.png); }
 
+a {
+  text-decoration: none;
+  background: transparent; }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
 .date-picker .ui-fc-box {
   font-size: 12px; }
   .date-picker .ui-fc-box tbody tr:first-child a:hover .fc-day-solar {

@@ -23,6 +23,17 @@ $imgurl: '../img';
 }
 
 
+a{
+  text-decoration: none;
+  background: transparent;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .date-picker{
   .ui-fc-box{
     font-size: 12px;

@@ -19,6 +19,21 @@
 .ui-fc-preview .preview-refer-all {
   display: none; }
 
+.f-fr {
+  float: right; }
+
+.f-fl {
+  float: left; }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+a {
+  text-decoration: none;
+  background: transparent; }
+
 .fc-day-lunar {
   overflow: hidden;
   text-overflow: ellipsis;

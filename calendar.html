@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>日期插件-日历展示</title>
+  <style>
+    html,body{
+      font-size: 14px;
+    }
+    .calendar{
+      height: 800px;
+    }
+  </style>
 </head>
 <body>
   <div class="calendar"></div>
@@ -16,8 +24,8 @@
         jquery: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min','jquery']
       }
     })
-    require(['jquery','fCalendar/calendar'],function($){
-      $('.calendar').fsyCalendar();
+    require(['jquery','fCalendar/calendar'],function($,calendar){
+      calendar($('.calendar'))
     })
   </script>
 </body>
