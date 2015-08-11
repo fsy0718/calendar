@@ -3,7 +3,7 @@
 * view: fixed   表示包含solar 及lunar日历视图混合
 * preview:  表示需要右侧显示详情视图
 ###
-define ['lib/fsyCalendar/fsyCalendar'],->
+define ['./conf'],->
   (opt)->
     target = null
     opt ||= {}

@@ -1,0 +1,93 @@
+.date-picker .ui-fc-toolbar, .date-picker .fc-day-td a:hover .fc-day-solar, .date-picker .fc-day-cur .fc-day-solar, .date-picker .fc-day-today a {
+  position: relative; }
+
+.date-picker .ui-fc-toolbar button, .date-picker .ui-fc-toolbar .fc-icon {
+  position: absolute; }
+
+.date-picker .fc-day-td a {
+  text-align: center; }
+
+.date-picker .fc-sel-year .prev, .date-picker .fc-sel-year .next, .date-picker .fc-sel-month .prev, .date-picker .fc-sel-month .next {
+  background-image: url(../img/main_bg.png); }
+
+.date-picker .ui-fc-box {
+  font-size: 12px; }
+  .date-picker .ui-fc-box tbody tr:first-child a:hover .fc-day-solar {
+    border-top-color: #a5b0b9; }
+.date-picker .ui-fc-toolbar {
+  background: #a5b0b9;
+  height: 20px !important;
+  color: #fff; }
+  .date-picker .ui-fc-toolbar .fc-sel-today {
+    display: none; }
+  .date-picker .ui-fc-toolbar button {
+    background: transparent;
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-size: 12px;
+    line-height: 20px; }
+  .date-picker .ui-fc-toolbar .fc-icon {
+    width: 12px;
+    height: 12px; }
+.date-picker .fc-sel-year .prev {
+  background-repeat: no-repeat;
+  background-position: -100px -400px;
+  top: 4px;
+  left: 15px; }
+.date-picker .fc-sel-year .next {
+  background-repeat: no-repeat;
+  background-position: -150px -400px;
+  top: 4px;
+  right: 15px; }
+.date-picker .fc-sel-year .year {
+  top: 0;
+  left: 50px; }
+.date-picker .fc-sel-month .prev {
+  background-repeat: no-repeat;
+  background-position: -100px -450px;
+  top: 4px;
+  left: 32px; }
+.date-picker .fc-sel-month .next {
+  background-repeat: no-repeat;
+  background-position: -150px -450px;
+  top: 4px;
+  right: 30px; }
+.date-picker .fc-sel-month .month {
+  top: 0;
+  left: 92px; }
+.date-picker .ui-fc-table th {
+  background: #a5b0b9;
+  height: 20px !important;
+  line-height: 20px;
+  color: #fff;
+  font-weight: normal; }
+.date-picker .ui-fc-table tr td:first-child {
+  padding-left: 1px; }
+.date-picker .fc-day-td a {
+  display: block;
+  color: #687580;
+  width: 23px;
+  height: 24px;
+  background: #f6f6f6;
+  line-height: 22px; }
+  .date-picker .fc-day-td a:hover .fc-day-solar {
+    border-color: #56d1a7; }
+.date-picker .fc-day-td .fc-day-solar {
+  display: block;
+  margin-top: -1px;
+  margin-left: -1px;
+  border: solid 1px #a5b0b9; }
+.date-picker .fc-day-cur .fc-day-solar {
+  border-color: #56d1a7;
+  background: #d8faee; }
+.date-picker .fc-day-today a {
+  color: #fff; }
+.date-picker .fc-day-today .fc-day-solar {
+  background: #56d1a7;
+  border-color: #56d1a7; }
+.date-picker .fc-day-other a {
+  color: #a5b0b9; }
+.date-picker .fc-toolbar-list {
+  display: none; }

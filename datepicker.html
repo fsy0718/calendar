@@ -8,14 +8,18 @@
   <div class="calendar"></div>
   <script src="js/require.js"></script>
   <script>
+    var SX = {};
+    SX.calendars = {};
     require.config({
       baseUrl: './js',
       paths:{
         jquery: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min','jquery']
       }
     })
-    require(['jquery'],function($){
-      $('.calendar')
+    require(['jquery','fCalendar/datepicker'],function($){
+      $('.calendar').fsyCalendar({
+        theme: 'date-picker'
+      })
     })
   </script>
 </body>

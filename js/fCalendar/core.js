@@ -3,7 +3,7 @@
 * 日历核心模块
 * month 统一从1开始计数
  */
-define(['fDateSolar'], function(fDateSolar) {
+define(['fdate/fDateSolar'], function(fDateSolar) {
   var FCalendar, SELDAY, YEAR, _bindEvent, _calCells, _calHeader, _calPreview, _calSelMonth, _calSelVacation, _calSelYear, _calShelf, _calToolbar, _changeView, _rWeekN, digit, oDate, today, weekN, weekZh;
   weekZh = '日一二三四五六';
   weekN = '0123456';
@@ -20,7 +20,7 @@ define(['fDateSolar'], function(fDateSolar) {
     self.fidx = ++idx;
     obj.attr('fc-fidx', idx).addClass('fc-fidx-' + idx + ' ' + (self.conf.theme || 'intact'));
     if (!$('#fsycalendar-' + self.conf.theme).length) {
-      $('<link rel="stylesheet" type="text/css" href="' + SX.eve + '/css/calendar-' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head');
+      $('<link rel="stylesheet" type="text/css" href="./css/' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head');
     }
     shelf = _calShelf(self).appendTo(obj);
     _changeView(self, obj, null, true);

@@ -4,7 +4,7 @@
 * author: fsy0718@yeah.net
 * LICENSE： MIT
  */
-define(["lib/fsyCalendar/core"], function(FCalendar) {
+define(["./core"], function(FCalendar) {
   var _conf, day, month, oDate, year;
   oDate = new Date();
   year = oDate.getFullYear();
@@ -75,7 +75,7 @@ define(["lib/fsyCalendar/core"], function(FCalendar) {
       };
     }
     if (/^lunar|fixed$/.test(conf.view)) {
-      return require(['lib/fsyCalendar/lunarView'], function(lunarConf) {
+      return require(['fCalendar/lunarView'], function(lunarConf) {
         var _fnDay, _fnView;
         _fnDay = conf.beforeShowDay;
         _fnView = conf.beforeShow;

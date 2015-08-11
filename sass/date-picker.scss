@@ -1,0 +1,157 @@
+@charset "utf-8";
+$imgurl: '../img';
+%f-posr{
+  position: relative;
+}
+%f-posa{
+  position: absolute
+}
+%f-tlc{
+  text-align: center
+}
+
+%bgSpritesBg1 {
+  background-image: url(#{$imgurl}/main_bg.png);
+}
+
+@mixin bgSprites1($left, $top, $repeat: no-repeat) {
+  @extend %bgSpritesBg1;
+  background: {
+    repeat: $repeat;
+    position: $left $top;
+  };
+}
+
+
+.date-picker{
+  .ui-fc-box{
+    font-size: 12px;
+    tbody tr:first-child{
+      a:hover .fc-day-solar{
+          border-top-color: #a5b0b9;
+      }
+    }
+  }
+
+  .ui-fc-toolbar{
+    background: #a5b0b9;
+    height: 20px!important;
+    color: #fff;
+    @extend %f-posr;
+    .fc-sel-today{
+      display: none;
+    }
+    button{
+      background: transparent;
+      border: 0 none;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-size: 12px;
+      line-height: 20px;
+      @extend %f-posa;
+    }
+    .fc-icon{
+      @extend %f-posa;
+      width: 12px;
+      height: 12px;
+    }
+
+  }
+  .fc-sel-year{
+    .prev{
+      @include bgSprites1(-100px,-400px);
+      top: 4px;
+      left: 15px;
+    }
+    .next{
+      @include bgSprites1(-150px,-400px);
+      top: 4px;
+      right: 15px;
+    }
+    .year{
+      top: 0;
+      left: 50px;
+    }
+  }
+  .fc-sel-month{
+    .prev{
+      @include bgSprites1(-100px,-450px);
+      top: 4px;
+      left: 32px;
+    }
+    .next{
+      @include bgSprites1(-150px,-450px);
+      top: 4px;
+      right: 30px;
+    }
+    .month{
+      top: 0;
+      left: 92px;
+    }
+  }
+  .ui-fc-table{
+    th{
+      background: #a5b0b9;
+      height: 20px!important;
+      line-height: 20px;
+      color: #fff;
+      font-weight: normal;
+    }
+    tr{
+      td:first-child{
+        padding-left: 1px;
+      }
+    }
+  }
+  .fc-day-td{
+    a{
+      display: block;
+      color: #687580;
+      width: 23px;
+      height: 24px;
+      @extend %f-tlc;
+      background: #f6f6f6;
+      line-height: 22px;
+      &:hover{
+        .fc-day-solar{
+          border-color: #56d1a7;
+          @extend %f-posr;
+        }
+      }
+    }
+    .fc-day-solar{
+      display: block;
+      margin-top: -1px;
+      margin-left: -1px;
+      border: solid 1px #a5b0b9;
+    }
+  }
+  .fc-day-cur{
+    .fc-day-solar{
+      border-color: #56d1a7;
+      background: #d8faee;
+      @extend %f-posr;
+    }
+  }
+
+  .fc-day-today{
+    a{
+      color: #fff;
+      @extend %f-posr;
+    }
+    .fc-day-solar{
+      background: #56d1a7;
+      border-color: #56d1a7;
+    }
+  }
+  .fc-day-other{
+    a{
+      color: #a5b0b9;
+    }
+  }
+  .fc-toolbar-list{
+    display: none;
+  }
+}
+

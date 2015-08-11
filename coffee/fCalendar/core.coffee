@@ -2,7 +2,7 @@
 * 日历核心模块
 * month 统一从1开始计数
 ###
-define ['fDateSolar'],(fDateSolar)->
+define ['fdate/fDateSolar'],(fDateSolar)->
   weekZh = '日一二三四五六'
   weekN = '0123456'
   oDate = fDateSolar()
@@ -18,7 +18,7 @@ define ['fDateSolar'],(fDateSolar)->
     self.fidx = ++idx
     obj.attr('fc-fidx',idx).addClass('fc-fidx-' + idx + ' ' + (self.conf.theme || 'intact'))
     unless $('#fsycalendar-' + self.conf.theme).length
-      $('<link rel="stylesheet" type="text/css" href="' + SX.eve + '/css/calendar-' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head')
+      $('<link rel="stylesheet" type="text/css" href="./css/' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head')
     #骨架
     shelf = _calShelf(self).appendTo(obj)
     _changeView(self,obj,null,true)

@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>日历插件-日历模块展示</title>
+  <title>日期插件-日历展示</title>
 </head>
 <body>
-
+  <div class="calendar"></div>
+  <script src="js/require.js"></script>
+  <script>
+    var SX = {};
+    SX.calendars = {};
+    require.config({
+      baseUrl: './js',
+      paths:{
+        jquery: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min','jquery']
+      }
+    })
+    require(['jquery','fCalendar/calendar'],function($){
+      $('.calendar').fsyCalendar();
+    })
+  </script>
 </body>
 </html>

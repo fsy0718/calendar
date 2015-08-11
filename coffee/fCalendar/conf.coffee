@@ -3,7 +3,7 @@
 * author: fsy0718@yeah.net
 * LICENSE： MIT
 ###
-define ["lib/fsyCalendar/core"],(FCalendar)->
+define ["./core"],(FCalendar)->
   oDate = new Date()
   year = oDate.getFullYear()
   month = oDate.getMonth() + 1
@@ -63,7 +63,7 @@ define ["lib/fsyCalendar/core"],(FCalendar)->
           td.addClass('fc-day-other')
         $.isFunction(_fnlimit) and _fnlimit(ymd,td,tableView,view)
     if /^lunar|fixed$/.test conf.view
-      require ['lib/fsyCalendar/lunarView'],(lunarConf)->
+      require ['fCalendar/lunarView'],(lunarConf)->
         _fnDay = conf.beforeShowDay
         _fnView = conf.beforeShow
         conf.beforeShowDay =  (ymd,td,tableView,view)->

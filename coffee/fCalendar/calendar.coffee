@@ -4,7 +4,7 @@
 * preview:  表示需要右侧显示详情视图
 * beforeShow函数要被调用 显示出节假日安排,将节假日放到节假日安排的选择框中 由三部分组成 0101月日【必选】  *|# 节假日图标【可选】  *表示节假日上班图标 无表示休息图标 #表示无节假日图标 xxxx节假日名称，表示必须加入到快速切换中【可选】 如0101*元旦 表示0101元旦上班 0102#元旦 表示必须加入到快捷切换且无vacation按钮
 ###
-define ['lib/fsyCalendar/fsyCalendar','lib/fsyCalendar/preview'],(calendar,preview)->
+define ['./conf','./preview'],(calendar,preview)->
   dReg = /(\d{2})(\d{2})(\*|\#)?(.+)?/
   yReg = /\d{4}/
   y = null

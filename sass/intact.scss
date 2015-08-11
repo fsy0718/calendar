@@ -1,0 +1,453 @@
+@charset "utf-8";
+%f-posr{
+  position: relative
+}
+%f-posa{
+  position: absolute
+}
+%f-tlc{
+  text-align: center
+}
+%f-tll{
+  text-align: left;
+}
+%f-tlr{
+  text-align: right;
+}
+%f-fl{
+  float: left;
+}
+%f-dn{
+  display: none;
+}
+$u-triangle1: .5em .5em #a5b0b9;
+
+//有用的一些扩展
+//小三角 triangle1  利用border实现   triangle2  利用◆实现 triangle2  利用transform实现
+@mixin u-triangle1-basic {
+  display: inline-block;
+  width: 0;
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+@mixin u-triangle1($direction) {
+  $width1: nth($u-triangle1, 1) / 2;
+  $width2: nth($u-triangle1, 1);
+  $height1: nth($u-triangle1, 2) / 2;
+  $height2: nth($u-triangle1, 2);
+  @if $direction == down {
+    border: {
+      color: nth($u-triangle1, 3) transparent transparent;
+      style: solid dashed dashed;
+      width: $width2 $height1 0;
+    };
+  }
+  @else if $direction == up {
+    border: {
+      color: transparent transparent nth($u-triangle1, 3);
+      style: dashed dashed solid;
+      width: 0 $height1 $width2;
+    };
+  }
+  @else if $direction == left {
+    border: {
+      color: transparent nth($u-triangle1, 3) transparent transparent;
+      style: dashed solid dashed dashed;
+      width: $width1 $height2 $width1 0;
+    };
+  }
+  @else if $direction == right {
+    border: {
+      color: transparent transparent transparent nth($u-triangle1, 3);
+      style: dashed dashed dashed solid;
+      width: $width1 0 $width1 $height2;
+    };
+  }
+  @else if $direction == downright {
+    border: {
+      color: nth($u-triangle1, 3) transparent transparent nth($u-triangle1, 3);
+      style: solid dashed dashed solid;
+      width: $width1 $height1;
+    };
+  }
+  @else if $direction == downleft {
+    border: {
+      color: nth($u-triangle1, 3) nth($u-triangle1, 3) transparent transparent;
+      style: solid solid dashed dashed;
+      width: $width1 $height1;
+    };
+  }
+  @else if $direction == topleft {
+    border: {
+      color: transparent nth($u-triangle1, 3) nth($u-triangle1, 3) transparent;
+      style: dashed solid solid dashed;
+      width: $width1 $height1;
+    };
+  }
+  @else if $direction == topright {
+    border: {
+      color: transparent transparent nth($u-triangle1, 3) nth($u-triangle1, 3);
+      style: dashed dashed solid solid;
+      width: $width1 $height1;
+    };
+  }
+}
+
+// Text overflow
+// 元素可以设置宽度才可应用省略号
+%ellipsis-basic {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin ellipsis($width: 100%) {
+  @extend %ellipsis-basic;
+  width: $width;
+}
+
+$fcimg : '../img/intact.png';
+
+
+%fc {
+  background-image: url(#{$fcimg});
+}
+
+@mixin fcbg($left, $top, $repeat: no-repeat) {
+  @extend %fc;
+  background: {
+    repeat: $repeat;
+    position: $left $top;
+  };
+}
+
+
+.ui-fc-box{
+  width: 100%;
+  height: 100%;
+  line-height: 1.5;
+}
+.ui-fc-table{
+  width: 100%;
+  //height: 95.45%;
+  height: 100%;
+  vertical-align: middle;
+}
+.ui-fc-body,.ui-fc-preview,.ui-fc-cont,.preview-cont{
+  height: 100%;
+}
+
+$u-triangle1: .5em .5em #a5b0b9;
+.ui-fc-toolbar{
+  @extend %f-posr;
+  @extend %f-tlc;
+}
+
+.ui-fc-sel,.fc-sel-today {
+  width: 134px;
+  height: 28px;
+  font-size: 1.166em;
+  line-height: 28px;
+  @extend %f-posa;
+  top: 50%;
+  margin-top: -14px;
+}
+.ui-fc-sel{
+  @include fcbg(0,-140px);
+  overflow: hidden;
+  .prev{
+    left: 0;
+    @include fcbg(-30px,0)
+  }
+  .next{
+    @include fcbg(-60px ,0)
+  }
+  .down{
+    @include fcbg(0,0)
+  }
+  .next,.down{
+    right:0;
+  }
+  .ui-fc-dropdown{
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+  }
+}
+.fc-sel-year{
+  left: 0;
+}
+.fc-sel-month{
+  left: 28.5%;
+}
+.fc-sel-vacation{
+  left: 57.6%;
+  .ui-fc-dropdown{
+    padding-right: 30px;
+  }
+}
+.fc-sel-today{
+  width: 72px;
+  right: 0;
+  background: #3e9eef;
+  color: #fff;
+  &:hover{
+    color: #fff;
+    opacity: 0.8;
+  }
+
+}
+.fc-icon{
+  @extend %f-posa;
+  width: 30px;
+  height: 100%;
+  top: 0;
+  background-color: #a5b0b9;
+  z-index: 10;
+  &:hover{
+    opacity:0.8;
+  }
+}
+
+.fc-toolbar-list{
+  @extend %f-posa;
+  width: 100%;
+  left: 0;
+  top: 50%;
+  margin-top: 1.1em;
+  line-height: 2;
+  .dropdown-option{
+    cursor: pointer;
+  }
+  .dropdown-option:hover,.dropdown-option-selected{
+    background:#d8faee;
+  }
+  .list-box{
+    @extend %f-posa;
+    z-index: 20;
+    @extend %f-tlc;
+    background: #fff;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: solid 1px #a5b0b9;
+    border-top: 0 none;
+    width: 132px!important;
+    display: none;
+  }
+  .list-month-box{
+    left: 28.5%
+  }
+  .list-vacation-box{
+    left: 57.6%;
+  }
+}
+.ui-fc-head{
+  color: #a5b0b9;
+  font-size: 1.333em;
+}
+.ui-fc-cont{
+  color: #8e979e;
+  padding: 0 3.5%;
+  font-size: 1em;
+  border-radius: 6px;
+  //background-color: #fff;
+  border: solid 1px #e8e8e8;
+  box-sizing: border-box;
+  box-shadow: 0 0 13px rgba(106,112,116,.07);
+}
+.ui-fc-table{
+  table-layout:fixed;
+  font-size: 1em;
+  th,td{
+    width: percentage(1 / 7);
+    border-top: solid 1px #d9d9d9;
+  }
+}
+//显示阳历日期
+.fc-day-solar{
+  font-size: 1.833em;
+  display: block;
+  padding-top: .2em;
+}
+//显示农历日期
+.fc-day-lunar{
+  font-size: 1.333em;
+  display: inline-block;
+  @include ellipsis();
+}
+//显示节假日安排
+.fc-day-vacation{
+  font-size: 1.166em;
+  line-height: 19px;
+  width: 19px;
+  height: 19px;
+  @extend %f-posa;
+  top: 0;
+  right: 2px;
+  color: #fff;
+}
+//班
+.vacation-work{
+  @include fcbg(-140px,-30px);
+}
+.vacation-rest{
+  @include fcbg(-110px,-30px);
+}
+.fc-day-today{
+  .fc-day-cell{
+    background: #56d1a7;
+    color: #fff;
+    &:hover{
+      color: #fff;
+    }
+    .vacation-rest{
+      color: #ef4f48;
+    }
+    .vacation-work{
+      color: #56d1a7;
+    }
+  }
+  .vacation-rest,.vacation-work{
+    @include fcbg(-110px,0);
+  }
+
+}
+.fc-day-cell{
+  @extend %f-posr;
+  @extend %f-tlc;
+  //height: 83%;
+  //margin: 8.5% 5%;
+  display: inline-block;
+  color: #8e979e;
+  width: 90%;
+  //height: 80%;
+  border: solid 3px transparent;
+  &:hover{
+    border-color:#56d1a7;
+    color: #8e979e;
+  }
+}
+.fc-day-cur .fc-day-cell{
+  border-color: #56d1a7;
+}
+.fc-day-reset, .fc-day-vacation{
+  .fc-day-solar{
+    color: #ef4f48;
+  }
+}
+.fc-day-holiday .fc-day-lunar{
+  color: #56d1a7;
+}
+.fc-day-holiday.fc-day-today .fc-day-lunar{
+  color: #fff;
+}
+.fc-day-other{
+  .fc-day-solar,.fc-day-lunar {
+    color: #ccd1d4;
+  }
+  .vacation-rest,.vacation-work{
+    @include fcbg(-171px,-30px)
+  }
+}
+.br2 .ui-fc-cont{
+  border-radius: 6px 0 0 6px;
+}
+$u-triangle1: 20px 10px #fff;
+.ui-fc-preview{
+  background-color: #3e9eef;
+  color: #fff;
+  font-size: 1.666em;
+  .preview-date{
+    top: 50%;
+    margin-top: -.833em;
+    left: 0;
+    width: 100%;
+    @extend %f-tlr;
+    .day{
+      @extend %f-fl;
+    }
+  }
+  .preview-cont{
+    padding: 0 1em;
+    @extend %f-tlc;
+  }
+  .preview-day{
+    margin-top: 4px;
+    font-family: 'Arial';
+    font-size: 3.3em;
+    width: 101px;
+    height: 101px;
+    line-height: 1.525em;
+    color:#3e9eef;
+    @include fcbg(0,-30px);
+  }
+  .preview-lunar{
+    line-height: 1.5;
+    margin-top: .5em;
+    padding-bottom: 1.458em;
+    border-bottom: solid 1px #3592e0;
+    .day,.year{
+      color: #dbf5ff
+    }
+  }
+  .preview-refer{
+    border-top: solid 1px #61aff2;
+    padding-top: .833em;
+    height:270px;
+    .suit,.avoid{
+      height: 270px;
+      width: 50%;
+      line-height: 1.5;
+      overflow: hidden;
+      i{
+        font-size: 2em;
+        display: block;
+      }
+    }
+  }
+  .preview-refer-all{
+    @extend %f-tll;
+    @extend %f-dn;
+    color: #8e979e;
+    top: 30px;
+    padding: 5px;
+    right: 180px;
+    width: 300px;
+    background: #fff;
+    border: solid 1px #3e9eef;
+    border-right: 0 none;
+    .suit-all,.avoid-all{
+      font-size: 12px;
+      margin-left: 20px;
+      i{
+        padding-right: 5px;
+        font-size: 14px;
+        margin-left: -20px;
+      }
+    }
+    .suit-all i{
+      color: #56d1a7;
+    }
+    .avoid-all i{
+      color: #ef4f48;
+    }
+    &:before{
+      @include u-triangle1-basic;
+      @include u-triangle1(right);
+      content: '';
+      @extend %f-posa;
+      overflow: hidden;
+      right: -5px;
+      top: 50%;
+      margin-top: -10px;
+    }
+  }
+}
+
