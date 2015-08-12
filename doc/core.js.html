@@ -1,48 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: core.js</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Source: core.js</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Source: core.js</h1>
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+    
+    
+    <script>
+    var config = {"default":{"outputSourceFiles":true},"monospaceLinks":true,"cleverLinks":true};
+    </script>
+    
 
     
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="FCalendar">
+            <span class="title">
+                <a href="FCalendar.html">FCalendar</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="core.js.html">Source: core.js</h1>
+        
 
 
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>
+            <pre class="prettyprint source "><code>
 /**
  * @module core
  * @desc 日历核心模块
  * @requires  fDateSolar 公历日期相关扩展方法
+ * @requires FCalendar
  */
-define(['./fdate-solar'], function(fDateSolar) {
+define(['./fdate-solar', './FCalendar'], function(fDateSolar, FCalendar) {
 
   /**
-   * @inner 星期相关参数
+   * @inner
+   * @description   星期相关参数
    * @type {string}
    */
-  var FCalendar, SELDAY, YEAR, _bindEvent, _calCells, _calHeader, _calPreview, _calSelMonth, _calSelVacation, _calSelYear, _calShelf, _calToolbar, _changeView, _rWeekN, digit, oDate, today, weekN, weekZh;
+  var SELDAY, YEAR, _bindEvent, _calCells, _calHeader, _calPreview, _calSelMonth, _calSelVacation, _calSelYear, _calShelf, _calToolbar, _changeView, _rWeekN, digit, oDate, today, weekN, weekZh;
   weekZh = '日一二三四五六';
   weekN = '0123456';
 
   /**
-   * @inner 当前日期对象
+   * @inner
+   * @description   当前日期对象
    * @type {fDateSolar}
    */
   oDate = fDateSolar();
@@ -51,42 +92,12 @@ define(['./fdate-solar'], function(fDateSolar) {
   YEAR = null;
 
   /**
-   * @class FCalendar
-   * @desc 日历插件构造函数
-   * @param { JqueryDOM} obj  渲染日历依赖的 jquery DOM 元素
-   * @param {Object} [conf]  配置参数@see {@link conf}
-   *
+   * @inner
+   * @description  为日历插件添加事件
+   * @param  {JqueryDOM} obj 监听事件DOM
+   * @param  {FCalendar} _c  FCalendar的实例对象
+   * @return {FCalendar}     FCalendar的实例对象
    */
-  FCalendar = function(obj, conf) {
-    var fcBody, idx, preview, self, shelf;
-    self = this;
-    self._HASLIST = [];
-    idx = 0;
-    self.conf = conf;
-    self.fidx = ++idx;
-    if (!obj.length) {
-      return;
-    }
-    obj.attr('fc-fidx', idx).addClass('fc-fidx-' + idx + ' ' + (self.conf.theme || 'intact'));
-    if (!$('#fsycalendar-' + self.conf.theme).length) {
-      $('&lt;link rel="stylesheet" type="text/css" href="' + SX.eve + '/css/calendar-' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head');
-    }
-    shelf = _calShelf(self).appendTo(obj);
-    _changeView(self, obj, null, true);
-    _bindEvent(obj, self);
-    if (+self.conf.preview) {
-      fcBody = shelf.find('.ui-fc-body');
-      preview = $(_calPreview(self.conf));
-      $.isFunction(self.conf.beforeShowPreview) &amp;&amp; self.conf.beforeShowPreview(preview, obj, self, true);
-      preview.insertAfter(fcBody);
-      fcBody.addClass('f-fl br2').css('width', 100 - self.conf.preview + '%');
-    }
-    $.isFunction(self.conf.beforeShow) &amp;&amp; self.conf.beforeShow(obj, self, true);
-    shelf.show();
-    $.isFunction(self.conf.afterShow) &amp;&amp; self.conf.afterShow(obj, self, true);
-    SX.calendars[idx] = self;
-    return self;
-  };
   _bindEvent = function(obj, _c) {
     var listBox, toolbar;
     obj.on('click.calendar', '.fc-day-td', function(e, eData) {
@@ -159,12 +170,35 @@ define(['./fdate-solar'], function(fDateSolar) {
     }
     return _c;
   };
+
+  /**
+   * @inner
+   * @description  创建日历骨架
+   * @param  {FCalendar} _c FCalendar实例
+   * @return {JqueryDOM}    日历骨架DOM
+   */
   _calShelf = function(_c) {
     return $('&lt;div class="ui-fc-box f-dn">&lt;div class="ui-fc-body">&lt;div class="ui-fc-cont">&lt;div class="ui-fc-tbox" style="height:100%">&lt;table class="ui-fc-table">&lt;thead>&lt;tr class="ui-fc-head">&lt;/tr>&lt;/thead>&lt;tbody>&lt;/tbody>&lt;/table>&lt;/div>&lt;/div>&lt;/div>&lt;/div>');
   };
+
+  /**
+   * @inner
+   * @description 返回星期的自定义排序
+   * @param  {FCalendar} _c FCalendar实例
+   * @return {string}    返回星期的排序
+   * @example
+   *   用户设置以2为日历的第一天，此函数返回 2345601
+   */
   _rWeekN = function(_c) {
     return weekN.substring(_c.conf.firstDay, 7) + weekN.substring(0, _c.conf.firstDay);
   };
+
+  /**
+   * @inner
+   * @description 返回经过自定义排序后的日历星期项的html片断
+   * @param  {FCalendar} _c FCalendar实例
+   * @return {string}    日历星期的html片断
+   */
   _calHeader = function(_c) {
     var _newWeekN, _newWeeks, i, idx, thClass, weeks;
     _newWeeks = weekZh.substring(_c.conf.firstDay, 7) + weekZh.substring(0, _c.conf.firstDay);
@@ -182,6 +216,12 @@ define(['./fdate-solar'], function(fDateSolar) {
     }
     return weeks;
   };
+
+  /**
+   * @inner
+   * @param  {Conf} conf 日历的配置对象
+   * @return {string}      年份选择的下拉框html片断
+   */
   _calSelYear = function(conf) {
     var i, str;
     str = '&lt;div class="list-year-box list-box f-dn">&lt;ul class="list-year-cont" data-type="year">';
@@ -192,6 +232,12 @@ define(['./fdate-solar'], function(fDateSolar) {
     }
     return str + '&lt;/ul>&lt;/div>';
   };
+
+  /**
+   * @inner
+   * @param  {Conf} conf 日历的配置对象
+   * @return {string}      月份选择的下拉框html片断
+   */
   _calSelMonth = function(conf) {
     var i, str;
     str = '&lt;div class="list-month-box list-box f-dn">&lt;ul class="list-month-cont" data-type="month">';
@@ -202,9 +248,21 @@ define(['./fdate-solar'], function(fDateSolar) {
     }
     return str + '&lt;/ul>&lt;/div>';
   };
+
+  /**
+   * @inner
+   * @param  {Conf} conf 日历的配置对象
+   * @return {string}      休息选择的下拉框html片断
+   */
   _calSelVacation = function(conf) {
     return '&lt;div class="list-vacation-box list-box f-dn">&lt;ul class="list-vacation-cont" data-type="vacation">&lt;li class="dropdown-option">假期安排&lt;/li>&lt;/ul>';
   };
+
+  /**
+   * @inner
+   * @param  {FCalendar} _c FCalendar的实例对象
+   * @return {string}    包含年份、月份、假期的顶部工具栏
+   */
   _calToolbar = function(_c) {
     var str;
     str = '&lt;div class="fc-sel-year ui-fc-sel">&lt;a href="javascript:;" hidefocus="true" class="fc-icon J_change-date prev" action="prev-year">&lt;/a>&lt;button class="year ui-fc-dropdown J_change-date J_change-view " action="year" >&lt;/button>&lt;a href="javascript:;" hidefocus="true" class="fc-icon J_change-date next" action="next-year">&lt;/a>&lt;/div>';
@@ -213,6 +271,16 @@ define(['./fdate-solar'], function(fDateSolar) {
     str += '&lt;a href="javascript:;" hidefocus="true" class="fc-sel-today J_change-date">返回今天&lt;/a>';
     return str + '&lt;div class="fc-toolbar-list">' + _calSelYear(_c.conf) + _calSelMonth(_c.conf) + _calSelVacation(_c.conf) + '&lt;/div>';
   };
+
+  /**
+   * @inner
+   * @description 生成日历的日期
+   * @param  {Array} date      包含年月日的数组
+   * @param  {JqueryDOM} tableView 日历的日期table元素
+   * @param  {string|number} week      一个星期的最后一天
+   * @param  {FCalendar} _c        FCalendar的实例对象
+   * @return {FCalendar}           FCalendar的实例对象
+   */
   _calCells = function(date, tableView, week, _c) {
     var _m, _newWeekN, _y, curDays, curday, dStr, i, idx, j, lastDay, mOffset, nextDays, prevDays, prevMonthDays, selectDay, tbody, td, tdClass, todayStr, tr, ymd;
     _newWeekN = _rWeekN(_c);
@@ -309,9 +377,25 @@ define(['./fdate-solar'], function(fDateSolar) {
     _c.idx = 0;
     return _c;
   };
+
+  /**
+   * @inner
+   * @param  {Conf} conf 日历配置对象
+   * @return {string}      日历右侧预览的html包围片断
+   */
   _calPreview = function(conf) {
     return '&lt;div class="ui-fc-preview f-fr" style="width:' + conf.preview + '%">&lt;div class="preview-cont">&lt;/div>&lt;/div>';
   };
+
+  /**
+   * @inner
+   * @description 变更日历视图，用于第一次渲染及用户触发的日历变更
+   * @param  {FCalendar} _c        FCalendar的实例对象
+   * @param  {JqueryDom} tableView 日历的table元素
+   * @param  {Date|fDateSolar|string|Array} date      需要渲染的日期
+   * @param  {boolean} first     是否是第一次渲染日历
+   * @return {FCalendar}           FCalendar的实例对象
+   */
   _changeView = function(_c, tableView, date, first) {
     var d, tbH, vh, weekNum;
     d = _c.fDateSolar(date || _c.conf.date);
@@ -335,6 +419,14 @@ define(['./fdate-solar'], function(fDateSolar) {
     }
     return _calCells(d, tableView, weekNum, _c);
   };
+
+  /**
+   * @inner
+   * @param  {number|string} num 需要变成两位的字符或数字
+   * @return {string}     两位数
+   * @example
+   *  1 => "01"
+   */
   digit = function(num) {
     if (num &lt; 10) {
       return '0' + (num | 0);
@@ -342,6 +434,12 @@ define(['./fdate-solar'], function(fDateSolar) {
       return num + '';
     }
   };
+
+  /**
+   * 日历视图刷新方法
+   * @param  {Date|fDateSolar|string|Array} date      需要渲染的日期
+   * @return {FCalendar}      FCalendar实例对象
+   */
   FCalendar.prototype.changeView = function(date) {
     var fcEle, self;
     self = this;
@@ -351,61 +449,12 @@ define(['./fdate-solar'], function(fDateSolar) {
     $.isFunction(self.conf.afterShow) &amp;&amp; self.conf.afterShow(fcEle, self, false);
     return self;
   };
+
+  /**
+   * 日期处理函数
+   * @extends {fDateSolar}
+   */
   FCalendar.prototype.fDateSolar = fDateSolar;
-  FCalendar.prototype.daysOfPrevMonth = function(y, m) {
-    var _days, _weekNum;
-    _weekNum = oDate.dayOfWeek([y, m, 1]);
-    if (~_weekNum) {
-      if (_weekNum > this.conf.firstDay) {
-        _days = _weekNum - this.conf.firstDay;
-      } else if (_weekNum === +this.conf.firstDay) {
-        _days = 0;
-      } else {
-        _days = 6 - this.conf.firstDay + 1 + _weekNum;
-      }
-    }
-    return _days || 0;
-  };
-  FCalendar.prototype.daysOfNextMonth = function(y, m) {
-    return (this.conf.weekMode === 'fixed' ? 6 : this.weeksOfMonth(y, m)) * 7 - this.daysOfPrevMonth(y, m) - oDate.daysOfMonth(y, m);
-  };
-  FCalendar.prototype.weeksOfMonth = function(y, m, totalDays) {
-    var overDays;
-    overDays = (totalDays || oDate.daysOfMonth(y, m)) - 7 + this.daysOfPrevMonth(y, m);
-    return Math.ceil(overDays / 7) + 1 || 0;
-  };
-  FCalendar.prototype.limit = function() {
-    var _arg, _date, _referDate, hasNum, i, range;
-    _arg = arguments;
-    if ($.isArray(arguments[0])) {
-      _arg = arguments[0];
-    }
-    range = [];
-    _referDate = fDateSolar(_arg[2]);
-    _referDate = _referDate._isLegal &amp;&amp; _referDate || fDateSolar();
-    i = 0;
-    hasNum = false;
-    while (i &lt; 2) {
-      if (_arg[i]) {
-        if ($.isNumeric(_arg[i])) {
-          range[i] = _referDate.add(_arg[i]);
-          hasNum = true;
-        } else if ((_date = fDateSolar(_arg[i])) &amp;&amp; _date._isLegal) {
-          range[i] = _date;
-        }
-      } else {
-        range[i] = oDate;
-      }
-      ++i;
-    }
-    if (range[0].diff(range[1]) &lt; 0) {
-      range = [range[1], range[0]];
-    }
-    if (_referDate.diff(range[0]) &lt; 0 &amp;&amp; _referDate.diff(range[1]) > 0) {
-      range = [oDate, oDate];
-    }
-    return range;
-  };
   return FCalendar;
 });
 </code></pre>
@@ -415,19 +464,17 @@ define(['./fdate-solar'], function(fDateSolar) {
 
 
 
+
+
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Wed Aug 12 2015 10:50:50 GMT+0800 (中国标准时间)
+        </footer>
+    </div>
 </div>
-
-<nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-core.html">core</a></li><li><a href="module-fDateSolar.html">fDateSolar</a></li></ul><h3>Classes</h3><ul><li><a href="FCalendar.html">FCalendar</a></li></ul>
-</nav>
-
-<br clear="both">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Tue Aug 11 2015 22:57:10 GMT+0800 (CST)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>

@@ -2,18 +2,22 @@
  * @module core
  * @desc 日历核心模块
  * @requires  fDateSolar 公历日期相关扩展方法
+ * @requires FCalendar
+
 
 ###
-define ['./fdate-solar'],(fDateSolar)->
+define ['./fdate-solar','./FCalendar'],(fDateSolar,FCalendar)->
   ###*
-   * @inner 星期相关参数
+   * @inner
+   * @description   星期相关参数
    * @type {string}
   ###
   weekZh = '日一二三四五六'
   weekN = '0123456'
 
   ###*
-   * @inner 当前日期对象
+   * @inner
+   * @description   当前日期对象
    * @type {fDateSolar}
   ###
   oDate = fDateSolar()
@@ -25,38 +29,12 @@ define ['./fdate-solar'],(fDateSolar)->
   YEAR = null   #表示需要跳转的年份 便于点击月份切换后年份跟着变动
 
   ###*
-   * @class FCalendar
-   * @desc 日历插件构造函数
-   * @param { JqueryDOM} obj  渲染日历依赖的 jquery DOM 元素
-   * @param {Object} [conf]  配置参数@see {@link conf}
-   *
+   * @inner
+   * @description  为日历插件添加事件
+   * @param  {JqueryDOM} obj 监听事件DOM
+   * @param  {FCalendar} _c  FCalendar的实例对象
+   * @return {FCalendar}     FCalendar的实例对象
   ###
-  FCalendar = (obj,conf) ->
-    self = @
-    self._HASLIST = []
-    idx = 0
-    self.conf = conf
-    self.fidx = ++idx
-    return unless obj.length
-    obj.attr('fc-fidx',idx).addClass('fc-fidx-' + idx + ' ' + (self.conf.theme || 'intact'))
-    unless $('#fsycalendar-' + self.conf.theme).length
-      $('<link rel="stylesheet" type="text/css" href="' + SX.eve + '/css/calendar-' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head')
-    #骨架
-    shelf = _calShelf(self).appendTo(obj)
-    _changeView(self,obj,null,true)
-    _bindEvent(obj,self)
-    if +self.conf.preview
-      fcBody = shelf.find('.ui-fc-body')
-      preview = $(_calPreview(self.conf))
-      $.isFunction(self.conf.beforeShowPreview) and self.conf.beforeShowPreview(preview,obj,self,true)
-      preview.insertAfter(fcBody)
-      fcBody.addClass('f-fl br2').css('width',100 - self.conf.preview + '%')
-    $.isFunction(self.conf.beforeShow) and self.conf.beforeShow(obj,self,true)
-    shelf.show()
-    $.isFunction(self.conf.afterShow) and self.conf.afterShow(obj,self,true)
-    SX.calendars[idx] = self
-    self
-
   _bindEvent = (obj,_c)->
     #日期点击事件
     obj.on 'click.calendar','.fc-day-td',(e,eData)->
@@ -114,12 +92,32 @@ define ['./fdate-solar'],(fDateSolar)->
         ul.parent().hide()
     _c
 
+  ###*
+   * @inner
+   * @description  创建日历骨架
+   * @param  {FCalendar} _c FCalendar实例
+   * @return {JqueryDOM}    日历骨架DOM
+  ###
   _calShelf = (_c)->
     $('<div class="ui-fc-box f-dn"><div class="ui-fc-body"><div class="ui-fc-cont"><div class="ui-fc-tbox" style="height:100%"><table class="ui-fc-table"><thead><tr class="ui-fc-head"></tr></thead><tbody></tbody></table></div></div></div></div>')
 
+  ###*
+   * @inner
+   * @description 返回星期的自定义排序
+   * @param  {FCalendar} _c FCalendar实例
+   * @return {string}    返回星期的排序
+   * @example
+   *   用户设置以2为日历的第一天，此函数返回 2345601
+  ###
   _rWeekN = (_c)->
     weekN.substring(_c.conf.firstDay,7) + weekN.substring(0,_c.conf.firstDay)
 
+  ###*
+   * @inner
+   * @description 返回经过自定义排序后的日历星期项的html片断
+   * @param  {FCalendar} _c FCalendar实例
+   * @return {string}    日历星期的html片断
+  ###
   _calHeader = (_c)->
     _newWeeks = weekZh.substring(_c.conf.firstDay,7) + weekZh.substring(0,_c.conf.firstDay)
     _newWeekN = _rWeekN(_c)
@@ -135,6 +133,11 @@ define ['./fdate-solar'],(fDateSolar)->
       i++
     weeks
 
+  ###*
+   * @inner
+   * @param  {Conf} conf 日历的配置对象
+   * @return {string}      年份选择的下拉框html片断
+  ###
   _calSelYear = (conf)->
     str = '<div class="list-year-box list-box f-dn"><ul class="list-year-cont" data-type="year">'
     i = conf.min
@@ -143,6 +146,11 @@ define ['./fdate-solar'],(fDateSolar)->
       i++
     str + '</ul></div>'
 
+  ###*
+   * @inner
+   * @param  {Conf} conf 日历的配置对象
+   * @return {string}      月份选择的下拉框html片断
+  ###
   _calSelMonth = (conf)->
     str = '<div class="list-month-box list-box f-dn"><ul class="list-month-cont" data-type="month">'
     i = 1
@@ -151,10 +159,19 @@ define ['./fdate-solar'],(fDateSolar)->
       i++
     str + '</ul></div>'
 
+  ###*
+   * @inner
+   * @param  {Conf} conf 日历的配置对象
+   * @return {string}      休息选择的下拉框html片断
+  ###
   _calSelVacation = (conf)->
     '<div class="list-vacation-box list-box f-dn"><ul class="list-vacation-cont" data-type="vacation"><li class="dropdown-option">假期安排</li></ul>'
 
-
+  ###*
+   * @inner
+   * @param  {FCalendar} _c FCalendar的实例对象
+   * @return {string}    包含年份、月份、假期的顶部工具栏
+  ###
   _calToolbar = (_c)->
     str = '<div class="fc-sel-year ui-fc-sel"><a href="javascript:;" hidefocus="true" class="fc-icon J_change-date prev" action="prev-year"></a><button class="year ui-fc-dropdown J_change-date J_change-view " action="year" ></button><a href="javascript:;" hidefocus="true" class="fc-icon J_change-date next" action="next-year"></a></div>'
     str += '<div class="fc-sel-month ui-fc-sel"><a href="javascript:;" hidefocus="true" class="fc-icon J_change-date prev" action="prev-month"></a><button class="month ui-fc-dropdown J_change-date J_change-view " action="month"></button><a href="javascript:;" hidefocus="true" class="fc-icon J_change-date next" action="next-month"></a></div>'
@@ -162,6 +179,15 @@ define ['./fdate-solar'],(fDateSolar)->
     str += '<a href="javascript:;" hidefocus="true" class="fc-sel-today J_change-date">返回今天</a>'
     str + '<div class="fc-toolbar-list">' + _calSelYear(_c.conf) + _calSelMonth(_c.conf) + _calSelVacation(_c.conf) + '</div>'
 
+  ###*
+   * @inner
+   * @description 生成日历的日期
+   * @param  {Array} date      包含年月日的数组
+   * @param  {JqueryDOM} tableView 日历的日期table元素
+   * @param  {string|number} week      一个星期的最后一天
+   * @param  {FCalendar} _c        FCalendar的实例对象
+   * @return {FCalendar}           FCalendar的实例对象
+  ###
   _calCells = (date,tableView,week,_c)->
     _newWeekN = _rWeekN(_c)
     i = 0
@@ -243,10 +269,23 @@ define ['./fdate-solar'],(fDateSolar)->
     _c.idx = 0  #重置计数器
     _c
 
-
+  ###*
+   * @inner
+   * @param  {Conf} conf 日历配置对象
+   * @return {string}      日历右侧预览的html包围片断
+  ###
   _calPreview = (conf)->
     '<div class="ui-fc-preview f-fr" style="width:' + conf.preview + '%"><div class="preview-cont"></div></div>'
 
+  ###*
+   * @inner
+   * @description 变更日历视图，用于第一次渲染及用户触发的日历变更
+   * @param  {FCalendar} _c        FCalendar的实例对象
+   * @param  {JqueryDom} tableView 日历的table元素
+   * @param  {Date|fDateSolar|string|Array} date      需要渲染的日期
+   * @param  {boolean} first     是否是第一次渲染日历
+   * @return {FCalendar}           FCalendar的实例对象
+  ###
   _changeView = (_c,tableView,date,first)->
     d = _c.fDateSolar(date || _c.conf.date)
     d = (if d._isLegal then d else oDate)._a
@@ -267,9 +306,21 @@ define ['./fdate-solar'],(fDateSolar)->
       tableView.find('.list-year-cont .dropdown-option[data-value="' + +d[0] + '"],.list-month-cont .dropdown-option[data-value="' + +d[1] + '"]').addClass('dropdown-option-selected')
     _calCells(d,tableView,weekNum,_c)
 
+  ###*
+   * @inner
+   * @param  {number|string} num 需要变成两位的字符或数字
+   * @return {string}     两位数
+   * @example
+   *  1 => "01"
+  ###
   digit = (num)->
     if num < 10 then '0' + (num|0) else num + ''
 
+  ###*
+   * 日历视图刷新方法
+   * @param  {Date|fDateSolar|string|Array} date      需要渲染的日期
+   * @return {FCalendar}      FCalendar实例对象
+  ###
   FCalendar::changeView = (date)->
     self = @
     fcEle = $('.fc-fidx-' + self.fidx)
@@ -278,53 +329,10 @@ define ['./fdate-solar'],(fDateSolar)->
     $.isFunction(self.conf.afterShow) and self.conf.afterShow(fcEle,self,false)
     self
 
+  ###*
+   * 日期处理函数
+   * @extends {fDateSolar}
+  ###
   FCalendar::fDateSolar = fDateSolar
-
-  #本月有多少天属于上个月
-  FCalendar::daysOfPrevMonth = (y,m)->
-    _weekNum = oDate.dayOfWeek([y,m,1])
-    if ~_weekNum
-      if _weekNum > @.conf.firstDay  #如果当前星期几大于第一天  直接减
-        _days = _weekNum - @.conf.firstDay
-      else if _weekNum is +@.conf.firstDay
-        _days = 0
-      else
-        _days = 6 - @.conf.firstDay + 1 + _weekNum
-    _days || 0
-
-  #本月有多少天属于下月
-  FCalendar::daysOfNextMonth = (y,m)->
-    (if @.conf.weekMode is 'fixed' then 6 else @.weeksOfMonth(y,m))  * 7 - @.daysOfPrevMonth(y,m) - oDate.daysOfMonth(y,m)
-
-  #判断当前视图下月份里中有几个星期
-  FCalendar::weeksOfMonth = (y,m,totalDays)->
-    overDays = (totalDays || oDate.daysOfMonth(y,m)) - 7 + @.daysOfPrevMonth(y,m)
-    Math.ceil(overDays / 7) + 1 || 0
-
-  #将限制条件转换成日期范围  如果起始值都为日期，则参考值失效
-  FCalendar::limit = ->
-    _arg = arguments
-    if $.isArray(arguments[0])
-      _arg = arguments[0]
-    range = []
-    _referDate = fDateSolar(_arg[2])
-    _referDate = _referDate._isLegal and _referDate || fDateSolar()
-    i = 0
-    hasNum = false
-    while i < 2
-      if _arg[i] #参考日期
-        if $.isNumeric(_arg[i])
-          range[i] = _referDate.add(_arg[i])
-          hasNum = true
-        else if (_date = fDateSolar(_arg[i])) and _date._isLegal
-          range[i] = _date
-      else
-        range[i] = oDate
-      ++i
-    if range[0].diff(range[1]) < 0
-      range = [range[1],range[0]]
-    if _referDate.diff(range[0]) < 0  and _referDate.diff(range[1]) > 0
-      range = [oDate,oDate]
-    range
 
   FCalendar

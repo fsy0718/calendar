@@ -1,161 +1,1801 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: core</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Module: core</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Module: core</h1>
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+    
+    
+    <script>
+    var config = {"default":{"outputSourceFiles":true},"monospaceLinks":true,"cleverLinks":true};
+    </script>
+    
 
     
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="FCalendar">
+            <span class="title">
+                <a href="FCalendar.html">FCalendar</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="module-core.html">Module: core</h1>
+        
 
 
 
 <section>
-
+    
 <header>
     <h2>
     core
     </h2>
     
-</header>
+</header>  
 
 <article>
     <div class="container-overview">
     
-
+    
     
         
             <div class="description">日历核心模块</div>
         
-
+        
         
 <dl class="details">
     
-
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2">line 2</a>
-    </li></ul></dd>
     
-
     
-
     
-
+    
+    
+    
     
 </dl>
 
-
+        
         
     
     </div>
-
     
-
     
-
+    
+    
+    
     
         <h3 class="subsection-title">Requires</h3>
-
+        
         <ul>
             <li><a href="module-fDateSolar.html">module:fDateSolar</a></li>
+        
+            <li>module:FCalendar</li>
         </ul>
     
-
     
-
     
-
+    
+    
+    
     
         <h3 class="subsection-title">Members</h3>
-
+        
         <dl>
             
 <dt>
-    <h4 class="name" id="oDate"><span class="type-signature">&lt;inner> </span>oDate<span class="type-signature"> :fDateSolar</span></h4>
+    <div class="nameContainer">
+        <h4 class="name" id="oDate"><span class="type-signature ">inner</span>oDate<span class="type-signature type fdatesolar">fDateSolar</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        当前日期对象
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_bindEvent">
+            
+            <span class="type-signature ">inner</span>_bindEvent<span class="signature">(obj, _c)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="FCalendar.html">FCalendar</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line36">line 36</a>
+        </div>
+        
+    </div>
 
     
 </dt>
 <dd>
     
+    
+    <div class="description">
+        为日历插件添加事件
+    </div>
+    
 
     
-        <h5>Type:</h5>
-        <ul>
-            <li>
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+            
+            <td class="type">
+            
                 
-<span class="param-type">fDateSolar</span>
+<span class="param-type">JqueryDOM</span>
 
 
-            </li>
-        </ul>
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                监听事件DOM</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>_c</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FCalendar.html">FCalendar</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                FCalendar的实例对象</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
-
+    
     
 <dl class="details">
     
-
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line21">line 21</a>
-    </li></ul></dd>
     
-
     
-
     
-
+    
+    
+    
     
 </dl>
 
+    
+    
 
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_calCells">
+            
+            <span class="type-signature ">inner</span>_calCells<span class="signature">(date, tableView, week, _c)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="FCalendar.html">FCalendar</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line219">line 219</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        生成日历的日期
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>date</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                包含年月日的数组</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>tableView</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">JqueryDOM</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                日历的日期table元素</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>week</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                一个星期的最后一天</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>_c</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FCalendar.html">FCalendar</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                FCalendar的实例对象</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_calHeader">
+            
+            <span class="type-signature ">inner</span>_calHeader<span class="signature">(_c)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line137">line 137</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        返回经过自定义排序后的日历星期项的html片断
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>_c</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FCalendar.html">FCalendar</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                FCalendar实例</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_calPreview">
+            
+            <span class="type-signature ">inner</span>_calPreview<span class="signature">(conf)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line321">line 321</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>conf</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Conf</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                日历配置对象</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_calSelMonth">
+            
+            <span class="type-signature ">inner</span>_calSelMonth<span class="signature">(conf)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line176">line 176</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>conf</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Conf</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                日历的配置对象</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_calSelVacation">
+            
+            <span class="type-signature ">inner</span>_calSelVacation<span class="signature">(conf)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line192">line 192</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>conf</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Conf</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                日历的配置对象</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_calSelYear">
+            
+            <span class="type-signature ">inner</span>_calSelYear<span class="signature">(conf)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line160">line 160</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>conf</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Conf</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                日历的配置对象</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_calShelf">
+            
+            <span class="type-signature ">inner</span>_calShelf<span class="signature">(_c)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{JqueryDOM}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line115">line 115</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        创建日历骨架
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>_c</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FCalendar.html">FCalendar</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                FCalendar实例</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_calToolbar">
+            
+            <span class="type-signature ">inner</span>_calToolbar<span class="signature">(_c)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line201">line 201</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>_c</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FCalendar.html">FCalendar</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                FCalendar的实例对象</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_changeView">
+            
+            <span class="type-signature ">inner</span>_changeView<span class="signature">(_c, tableView, date, first)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="FCalendar.html">FCalendar</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line334">line 334</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        变更日历视图，用于第一次渲染及用户触发的日历变更
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>_c</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FCalendar.html">FCalendar</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                FCalendar的实例对象</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>tableView</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">JqueryDom</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                日历的table元素</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>date</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+|
+
+<span class="param-type">fDateSolar</span>
+|
+
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                需要渲染的日期</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>first</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                是否是第一次渲染日历</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_rWeekN">
+            
+            <span class="type-signature ">inner</span>_rWeekN<span class="signature">(_c)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line127">line 127</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        返回星期的自定义排序
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>_c</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FCalendar.html">FCalendar</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                FCalendar实例</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>用户设置以2为日历的第一天，此函数返回 2345601</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="digit">
+            
+            <span class="type-signature ">inner</span>digit<span class="signature">(num)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core.js.html">core.js</a>, <a href="core.js.html#line365">line 365</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>num</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                需要变成两位的字符或数字</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>1 => "01"</code></pre>
     
 
     
@@ -163,32 +1803,27 @@
 
         </dl>
     
-
     
-
     
-
+    
     
 </article>
 
-</section>
+</section>  
 
 
 
 
+
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Wed Aug 12 2015 10:50:50 GMT+0800 (中国标准时间)
+        </footer>
+    </div>
 </div>
-
-<nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-core.html">core</a></li><li><a href="module-fDateSolar.html">fDateSolar</a></li></ul><h3>Classes</h3><ul><li><a href="FCalendar.html">FCalendar</a></li></ul>
-</nav>
-
-<br clear="both">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Tue Aug 11 2015 22:57:10 GMT+0800 (CST)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>

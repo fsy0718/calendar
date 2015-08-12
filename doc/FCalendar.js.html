@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Source: FCalendar.js</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+    
+    
+    <script>
+    var config = {"default":{"outputSourceFiles":true},"monospaceLinks":true,"cleverLinks":true};
+    </script>
+    
+
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="FCalendar">
+            <span class="title">
+                <a href="FCalendar.html">FCalendar</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="FCalendar.js.html">Source: FCalendar.js</h1>
+        
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source "><code>define(function() {
+
+  /**
+   * @constructor FCalendar
+   * @desc 日历插件构造函数
+   * @param { JqueryDOM} obj  渲染日历依赖的 jquery DOM 元素
+   * @param {Object} [conf]  配置参数@see {@link conf}
+   *
+   */
+  var FCalendar;
+  FCalendar = function(obj, conf) {
+    var fcBody, idx, preview, self, shelf;
+    self = this;
+    self._HASLIST = [];
+    idx = 0;
+    self.conf = conf;
+    self.fidx = ++idx;
+    if (!obj.length) {
+      return;
+    }
+    obj.attr('fc-fidx', idx).addClass('fc-fidx-' + idx + ' ' + (self.conf.theme || 'intact'));
+    if (!$('#fsycalendar-' + self.conf.theme).length) {
+      $('&lt;link rel="stylesheet" type="text/css" href="' + SX.eve + '/css/calendar-' + self.conf.theme + '.css" id="fsycalendar-' + self.conf.theme + '"/>').appendTo('head');
+    }
+    shelf = _calShelf(self).appendTo(obj);
+    _changeView(self, obj, null, true);
+    _bindEvent(obj, self);
+    if (+self.conf.preview) {
+      fcBody = shelf.find('.ui-fc-body');
+      preview = $(_calPreview(self.conf));
+      $.isFunction(self.conf.beforeShowPreview) &amp;&amp; self.conf.beforeShowPreview(preview, obj, self, true);
+      preview.insertAfter(fcBody);
+      fcBody.addClass('f-fl br2').css('width', 100 - self.conf.preview + '%');
+    }
+    $.isFunction(self.conf.beforeShow) &amp;&amp; self.conf.beforeShow(obj, self, true);
+    shelf.show();
+    $.isFunction(self.conf.afterShow) &amp;&amp; self.conf.afterShow(obj, self, true);
+    SX.calendars[idx] = self;
+    return self;
+  };
+
+  /**
+   * 日历视图刷新方法
+   * @param  {Date|fDateSolar|string|Array} date      需要渲染的日期
+   * @return {FCalendar}      FCalendar实例对象
+   */
+  FCalendar.prototype.changeView = function(date) {
+    var fcEle, self;
+    self = this;
+    fcEle = $('.fc-fidx-' + self.fidx);
+    _changeView(self, fcEle, date);
+    $.isFunction(self.conf.beforeShow) &amp;&amp; self.conf.beforeShow(fcEle, self, false);
+    $.isFunction(self.conf.afterShow) &amp;&amp; self.conf.afterShow(fcEle, self, false);
+    return self;
+  };
+
+  /**
+   * 日期处理函数
+   * @extends {fDateSolar}
+   */
+  FCalendar.prototype.fDateSolar = fDateSolar;
+
+  /**
+   * 本月有多少天属于上个月
+   * @param  {number|string} y 四位数的年份
+   * @param  {number|string} m 月份
+   * @return {number}   属于上月的天数
+   */
+  FCalendar.prototype.daysOfPrevMonth = function(y, m) {
+    var _days, _weekNum;
+    _weekNum = oDate.dayOfWeek([y, m, 1]);
+    if (~_weekNum) {
+      if (_weekNum > this.conf.firstDay) {
+        _days = _weekNum - this.conf.firstDay;
+      } else if (_weekNum === +this.conf.firstDay) {
+        _days = 0;
+      } else {
+        _days = 6 - this.conf.firstDay + 1 + _weekNum;
+      }
+    }
+    return _days || 0;
+  };
+
+  /**
+   * 本月有多少天属于下月
+   * @param  {number|string} y 四位数的年份
+   * @param  {number|string} m 月份
+   * @return {number}   属于下月的天数
+   */
+  FCalendar.prototype.daysOfNextMonth = function(y, m) {
+    return (this.conf.weekMode === 'fixed' ? 6 : this.weeksOfMonth(y, m)) * 7 - this.daysOfPrevMonth(y, m) - oDate.daysOfMonth(y, m);
+  };
+
+  /**
+   * 判断当前视图中月包含几个星期
+   * @param  {number|string} y         四位数年份
+   * @param  {number|string} m         月份
+   * @param  {number|string} [totalDays] 月份一共包含多少天
+   * @return {number}
+   */
+  FCalendar.prototype.weeksOfMonth = function(y, m, totalDays) {
+    var overDays;
+    overDays = (totalDays || oDate.daysOfMonth(y, m)) - 7 + this.daysOfPrevMonth(y, m);
+    return Math.ceil(overDays / 7) + 1 || 0;
+  };
+
+  /**
+   * 根据条件返回一个日期范围
+   * @param
+   * @return {Array} 日期范围
+   */
+  FCalendar.prototype.limit = function() {
+    var _arg, _date, _referDate, hasNum, i, range;
+    _arg = arguments;
+    if ($.isArray(arguments[0])) {
+      _arg = arguments[0];
+    }
+    range = [];
+    _referDate = fDateSolar(_arg[2]);
+    _referDate = _referDate._isLegal &amp;&amp; _referDate || fDateSolar();
+    i = 0;
+    hasNum = false;
+    while (i &lt; 2) {
+      if (_arg[i]) {
+        if ($.isNumeric(_arg[i])) {
+          range[i] = _referDate.add(_arg[i]);
+          hasNum = true;
+        } else if ((_date = fDateSolar(_arg[i])) &amp;&amp; _date._isLegal) {
+          range[i] = _date;
+        }
+      } else {
+        range[i] = oDate;
+      }
+      ++i;
+    }
+    if (range[0].diff(range[1]) &lt; 0) {
+      range = [range[1], range[0]];
+    }
+    if (_referDate.diff(range[0]) &lt; 0 &amp;&amp; _referDate.diff(range[1]) > 0) {
+      range = [oDate, oDate];
+    }
+    return range;
+  };
+  return FCalendar;
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+
+
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Wed Aug 12 2015 10:50:50 GMT+0800 (中国标准时间)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

@@ -26,7 +26,10 @@ gulp.task('sass',function(){
 gulp.task('jsdoc',['coffee'],function(){
   return gulp.src(['./js/fCalendar/*.js'])
     .pipe(jsdoc.parser())
-    .pipe(jsdoc.generator('doc',null,{
+    .pipe(jsdoc.generator('doc',{
+      path: 'node_modules/jaguarjs-jsdoc'
+
+      },{
       'private': true,
       monospaceLinks: true,
       cleverLinks: true,
